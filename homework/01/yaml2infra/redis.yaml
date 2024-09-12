@@ -1,0 +1,41 @@
+apiVersion: redis.tencentcloud.crossplane.io/v1alpha1
+kind: Instance
+metadata:
+  name: cloud-redis-tencent
+spec:
+  forProvider:
+    availabilityZone: "ap-hongkong-2"
+    memSize: 8192
+    name: redis-crossplane
+    passwordSecretRef:
+      key: example-key
+      name: example-secret
+      namespace: default
+    subnetId: ${tencentcloud_subnet.subnet.id}
+    typeId: ${data.tencentcloud_redis_zone_config.zone.list[0].type_id}
+    vpcId: ${tencentcloud_vpc.vpc.id}
+
+---
+
+apiVersion: vpc.tencentcloud.crossplane.io/v1alpha1
+kind: Subnet
+metadata:
+  name: redis-subnet
+spec:
+  forProvider:
+    availabilityZone: "ap-hongkong-2"
+    cidrBlock: "10.0.1.0/24"
+    name: "tf_redis_subnet"
+    vpcIdRef:
+      name: "redis-vpc"
+
+---
+
+apiVersion: vpc.tencentcloud.crossplane.io/v1alpha1
+kind: VPC
+metadata:
+  name: redis-vpc
+spec:
+  forProvider:
+    cidrBlock: "10.0.0.0/16"
+    name: "redis-vpc"
