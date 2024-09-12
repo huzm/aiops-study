@@ -11,9 +11,9 @@ spec:
       key: example-key
       name: example-secret
       namespace: default
-    subnetId: "redis-subnet"
+#    subnetId: "redis-subnet"
     typeId: 15
-    vpcId: "redis-vpc"
+#    vpcId: "redis-vpc"
 
 ---
 
