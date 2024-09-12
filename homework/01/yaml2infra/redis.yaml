@@ -11,9 +11,9 @@ spec:
       key: example-key
       name: example-secret
       namespace: default
-    subnetId: ${tencentcloud_subnet.subnet.id}
-    typeId: ${data.tencentcloud_redis_zone_config.zone.list[0].type_id}
-    vpcId: ${tencentcloud_vpc.vpc.id}
+    subnetId: "redis-subnet"
+    typeId: 15
+    vpcId: "redis-vpc"
 
 ---
 
